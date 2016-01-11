@@ -3,8 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:orderInCategory="100" app:showAsAction="never" />
-    <item android:id="@+id/gps" android:title="@string/gps"
+    <item android:id="@+id/magnetic_field" android:title="@string/magnetic_field"
         android:orderInCategory="100" app:showAsAction="never" />
     <item android:id="@+id/accelerometer" android:title="@string/accelerometer"
+        android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/gyroscope" android:title="@string/gyroscope"
         android:orderInCategory="100" app:showAsAction="never" />
 </menu>

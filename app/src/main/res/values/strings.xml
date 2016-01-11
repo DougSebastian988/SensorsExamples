@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">SensorsExamples</string>
     <string name="action_settings">Settings</string>
-    <string name="gps">GPS</string>
+    <string name="magnetic_field">Magnetic Field</string>
     <string name="accelerometer">Accelerometer</string>
+    <string name="gyroscope">Gyroscope</string>
 </resources>

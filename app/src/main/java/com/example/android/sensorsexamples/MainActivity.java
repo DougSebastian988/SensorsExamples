@@ -1,6 +1,11 @@
 package com.example.android.sensorsexamples;
 
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -12,10 +17,8 @@ import android.widget.TextView;
 
 
 
-public class MainActivity extends AppCompatActivity {
-    public enum SensorType {
-        GPS, ACCELEROMETER
-    };
+public class MainActivity extends AppCompatActivity implements SensorEventListener {
+
     public TextView textViewSensor;
     public TextView textView1;
     public TextView textView2;
@@ -24,10 +27,25 @@ public class MainActivity extends AppCompatActivity {
     public TextView textView5;
     public TextView textView6;
 
+    private int sensor_type;
+    private SensorManager sensorManager;
+    double ax,ay,az;   // these are the acceleration in x,y and z axis
+
+    private Handler handler = new Handler();
 
 
-    public SensorType sensor;
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
 
+            switch (sensor_type) {
+                default:
+                    break;
+            }
+      /* and here comes the "trick" */
+            handler.postDelayed(this, 100);
+        }
+    };
 
 
     @Override
@@ -53,8 +71,63 @@ public class MainActivity extends AppCompatActivity {
         textView5 = (TextView) findViewById(R.id.textView5);
         textView6 = (TextView) findViewById(R.id.textView6);
 
-        sensor = SensorType.GPS;
-        textViewSensor.setText("GPS");
+        sensor_type = Sensor.TYPE_MAGNETIC_FIELD;
+        textViewSensor.setText("Magnetic Field");
+        //handler.postDelayed(runnable, 100);
+
+        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD), SensorManager.SENSOR_DELAY_NORMAL);
+
+    }
+
+    private  void monitorSensor(int type) {
+        sensorManager.unregisterListener(this);
+        sensorManager.registerListener(this, sensorManager.getDefaultSensor(type), SensorManager.SENSOR_DELAY_NORMAL);
+    }
+
+
+    @Override
+    public void onAccuracyChanged(Sensor arg0, int arg1) {
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        switch (event.sensor.getType()) {
+            case Sensor.TYPE_MAGNETIC_FIELD:
+                sensorManager.unregisterListener(this);
+                sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD), SensorManager.SENSOR_DELAY_NORMAL);
+                break;
+            default:
+                sensorManager.unregisterListener(this);
+                sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD), SensorManager.SENSOR_DELAY_NORMAL);
+                int type_of_sensor = Sensor.TYPE_ACCELEROMETER;
+                break;
+        }
+
+        if (event.sensor.getType()==Sensor.TYPE_MAGNETIC_FIELD){
+            ax=event.values[0];
+            ay=event.values[1];
+            az=event.values[2];
+            textView1.setText("X = " + ax);
+            textView2.setText("Y = " + ay);
+            textView3.setText("Z = " + az);
+        }
+        if (event.sensor.getType()==Sensor.TYPE_ACCELEROMETER){
+            ax=event.values[0];
+            ay=event.values[1];
+            az=event.values[2];
+            textView1.setText("X = " + ax);
+            textView2.setText("Y = " + ay);
+            textView3.setText("Z = " + az);
+        }
+        if (event.sensor.getType()==Sensor.TYPE_GYROSCOPE){
+            ax=event.values[0];
+            ay=event.values[1];
+            az=event.values[2];
+            textView1.setText("X = " + ax);
+            textView2.setText("Y = " + ay);
+            textView3.setText("Z = " + az);
+        }
     }
 
     @Override
@@ -75,17 +148,25 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-        if (id == R.id.gps) {
-            sensor = SensorType.GPS;
-            textViewSensor.setText("GPS");
+        if (id == R.id.magnetic_field) {
+            sensor_type = Sensor.TYPE_MAGNETIC_FIELD;
+            textViewSensor.setText("Magnetic Field");
+            monitorSensor(sensor_type);
             return true;
         }
         if (id == R.id.accelerometer) {
-            sensor = SensorType.ACCELEROMETER;
+            sensor_type = Sensor.TYPE_ACCELEROMETER;
             textViewSensor.setText("Accelerometer");
+            monitorSensor(sensor_type);
             return true;
         }
 
+        if (id == R.id.gyroscope) {
+            sensor_type = Sensor.TYPE_GYROSCOPE;
+            textViewSensor.setText("Gyroscope");
+            monitorSensor(sensor_type);
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 }
