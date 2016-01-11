@@ -92,18 +92,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        switch (event.sensor.getType()) {
-            case Sensor.TYPE_MAGNETIC_FIELD:
-                sensorManager.unregisterListener(this);
-                sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD), SensorManager.SENSOR_DELAY_NORMAL);
-                break;
-            default:
-                sensorManager.unregisterListener(this);
-                sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD), SensorManager.SENSOR_DELAY_NORMAL);
-                int type_of_sensor = Sensor.TYPE_ACCELEROMETER;
-                break;
-        }
-
+       
         if (event.sensor.getType()==Sensor.TYPE_MAGNETIC_FIELD){
             ax=event.values[0];
             ay=event.values[1];
