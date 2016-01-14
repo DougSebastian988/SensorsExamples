@@ -92,32 +92,72 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-       
-        if (event.sensor.getType()==Sensor.TYPE_MAGNETIC_FIELD){
-            ax=event.values[0];
-            ay=event.values[1];
-            az=event.values[2];
-            textView1.setText("X = " + ax);
-            textView2.setText("Y = " + ay);
-            textView3.setText("Z = " + az);
-        }
-        if (event.sensor.getType()==Sensor.TYPE_ACCELEROMETER){
-            ax=event.values[0];
-            ay=event.values[1];
-            az=event.values[2];
-            textView1.setText("X = " + ax);
-            textView2.setText("Y = " + ay);
-            textView3.setText("Z = " + az);
-        }
-        if (event.sensor.getType()==Sensor.TYPE_GYROSCOPE){
-            ax=event.values[0];
-            ay=event.values[1];
-            az=event.values[2];
-            textView1.setText("X = " + ax);
-            textView2.setText("Y = " + ay);
-            textView3.setText("Z = " + az);
+        switch (event.sensor.getType()) {
+
+            case Sensor.TYPE_ACCELEROMETER:
+                ax = event.values[0];
+                ay = event.values[1];
+                az = event.values[2];
+                textView1.setText("X = " + ax);
+                textView2.setText("Y = " + ay);
+                textView3.setText("Z = " + az);
+                break;
+
+            case Sensor.TYPE_AMBIENT_TEMPERATURE:
+                ax = event.values[0];
+                textView1.setText("Temprature = " + ax);
+                textView2.setText("");
+                textView3.setText("");
+                break;
+            case Sensor.TYPE_MAGNETIC_FIELD:
+                ax = event.values[0];
+                ay = event.values[1];
+                az = event.values[2];
+                textView1.setText("X = " + ax);
+                textView2.setText("Y = " + ay);
+                textView3.setText("Z = " + az);
+                break;
+            case Sensor.TYPE_GYROSCOPE:
+                ax = event.values[0];
+                ay = event.values[1];
+                az = event.values[2];
+                textView1.setText("X = " + ax);
+                textView2.setText("Y = " + ay);
+                textView3.setText("Z = " + az);
+                break;
+            case Sensor.TYPE_LIGHT:
+                textView1.setText("Light = " + event.values[0]);
+                textView2.setText("");
+                textView3.setText("");
+                break;
+            case Sensor.TYPE_PROXIMITY:
+                textView1.setText("Proximity = " + event.values[0]);
+                textView2.setText("");
+                textView3.setText("");
+                break;
+            case Sensor.TYPE_PRESSURE:
+                textView1.setText("Pressure = " + event.values[0]);
+                textView2.setText("");
+                textView3.setText("");
+                break;
+            case Sensor.TYPE_RELATIVE_HUMIDITY:
+                textView1.setText("Humidity = " + event.values[0]);
+                textView2.setText("");
+                textView3.setText("");
+                break;
+            case Sensor.TYPE_GRAVITY:
+                ax = event.values[0];
+                ay = event.values[1];
+                az = event.values[2];
+                textView1.setText("X = " + ax);
+                textView2.setText("Y = " + ay);
+                textView3.setText("Z = " + az);
+                break;
+            default:
+                break;
         }
     }
+    
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -137,22 +177,58 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         if (id == R.id.action_settings) {
             return true;
         }
-        if (id == R.id.magnetic_field) {
-            sensor_type = Sensor.TYPE_MAGNETIC_FIELD;
-            textViewSensor.setText("Magnetic Field");
-            monitorSensor(sensor_type);
-            return true;
-        }
+
         if (id == R.id.accelerometer) {
             sensor_type = Sensor.TYPE_ACCELEROMETER;
             textViewSensor.setText("Accelerometer");
             monitorSensor(sensor_type);
             return true;
         }
-
+        if (id == R.id.ambient_temperature) {
+            sensor_type = Sensor.TYPE_AMBIENT_TEMPERATURE;
+            textViewSensor.setText("Ambient Temperature");
+            monitorSensor(sensor_type);
+            return true;
+        }
+        if (id == R.id.magnetic_field) {
+            sensor_type = Sensor.TYPE_MAGNETIC_FIELD;
+            textViewSensor.setText("Magnetic Field");
+            monitorSensor(sensor_type);
+            return true;
+        }
         if (id == R.id.gyroscope) {
             sensor_type = Sensor.TYPE_GYROSCOPE;
             textViewSensor.setText("Gyroscope");
+            monitorSensor(sensor_type);
+            return true;
+        }
+        if (id == R.id.light) {
+            sensor_type = Sensor.TYPE_LIGHT;
+            textViewSensor.setText("Light");
+            monitorSensor(sensor_type);
+            return true;
+        }
+        if (id == R.id.proximity) {
+            sensor_type = Sensor.TYPE_PROXIMITY;
+            textViewSensor.setText("Proximity");
+            monitorSensor(sensor_type);
+            return true;
+        }
+        if (id == R.id.pressure) {
+            sensor_type = Sensor.TYPE_PRESSURE;
+            textViewSensor.setText("Pressure");
+            monitorSensor(sensor_type);
+            return true;
+        }
+        if (id == R.id.relative_humidity) {
+            sensor_type = Sensor.TYPE_RELATIVE_HUMIDITY;
+            textViewSensor.setText("Relative Humidity");
+            monitorSensor(sensor_type);
+            return true;
+        }
+        if (id == R.id.gravity) {
+            sensor_type = Sensor.TYPE_GRAVITY;
+            textViewSensor.setText("Gravity");
             monitorSensor(sensor_type);
             return true;
         }

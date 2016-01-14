@@ -3,10 +3,23 @@
     xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:orderInCategory="100" app:showAsAction="never" />
-    <item android:id="@+id/magnetic_field" android:title="@string/magnetic_field"
-        android:orderInCategory="100" app:showAsAction="never" />
+
     <item android:id="@+id/accelerometer" android:title="@string/accelerometer"
         android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/ambient_temperature" android:title="@string/ambient_temperature"
+        android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/magnetic_field" android:title="@string/magnetic_field"
+        android:orderInCategory="100" app:showAsAction="never" />
     <item android:id="@+id/gyroscope" android:title="@string/gyroscope"
+        android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/light" android:title="@string/light"
+        android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/proximity" android:title="@string/proximity"
+        android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/pressure" android:title="@string/pressure"
+        android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/relative_humidity" android:title="@string/relative_humidity"
+        android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/gravity" android:title="@string/gravity"
         android:orderInCategory="100" app:showAsAction="never" />
 </menu>
